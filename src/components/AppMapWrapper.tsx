@@ -1,23 +1,34 @@
 import { useStore } from "@/hooks/useStore";
 import "leaflet/dist/leaflet.css";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import L from "leaflet";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { customMarkerIcon } from "@/utils/customMapMarker";
 
 const AppMap = () => {
   const { state } = useStore();
   const map = useMap();
+  const markerRef = useRef<L.Marker | null>(null);
 
   useEffect(() => {
     if (state.selectedUser && state.showLocation) {
       const coords = state.selectedUser.address.coordinates;
 
+      if (markerRef.current) {
+        map.removeLayer(markerRef.current);
+        markerRef.current = null;
+      }
+
+      const newMarker = L.marker(coords, { icon: customMarkerIcon })
+        .addTo(map)
+        .openPopup();
+
+      markerRef.current = newMarker;
+
       map.flyTo(coords, 12, {
         duration: 1.5,
         easeLinearity: 0.25,
       });
-
-      L.marker(coords).addTo(map).openPopup();
     }
   }, [state, map]);
 
