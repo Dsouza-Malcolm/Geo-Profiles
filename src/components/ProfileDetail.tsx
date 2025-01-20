@@ -10,7 +10,6 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
@@ -37,17 +36,14 @@ const ProfileDetail = () => {
             <DrawerTitle>
               {state.isAdmin ? "Edit profile" : "Profile Details"}
             </DrawerTitle>
-            {state.isAdmin && (
-              <DrawerDescription>
-                Make changes to your profile here. Click save when you're done.
-              </DrawerDescription>
-            )}
           </DrawerHeader>
           <ProfileForm className="px-4" />
           <DrawerFooter className="pt-2">
-            <DrawerClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DrawerClose>
+            {state.isAdmin && state.isDashboardOpen ? null : (
+              <DrawerClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DrawerClose>
+            )}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

@@ -47,18 +47,22 @@ const Dashboard = () => {
   return (
     <div className="h-screen overflow-auto bg-gray-50 scrollbar-thin">
       <div className="mx-auto max-w-7xl px-4 py-6">
-        <nav className="flex justify-between items-center mb-6 mx-4">
+        <nav className="flex justify-between items-center mb-12 sm:mb-6 sm:mx-4">
           <Button
             onClick={closeDashboard}
             variant={"link"}
-            className="hover:no-underline"
+            className="px-0 hover:no-underline"
           >
-            <h1 className="text-2xl font-semibold text-gray-800">
+            <h1 className=" text-2xl font-semibold text-gray-800">
               GeoProfiles
             </h1>
           </Button>
           <div className="flex gap-8">
-            <Button onClick={closeDashboard} variant={"ghost"}>
+            <Button
+              className="hidden sm:block"
+              onClick={closeDashboard}
+              variant={"ghost"}
+            >
               Home
             </Button>
             <Button
@@ -79,11 +83,11 @@ const Dashboard = () => {
         </nav>
 
         {/* Profile Cards Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center justify-items-center">
           {state.profiles.map((profile) => (
             <Card
               key={profile.id}
-              className="max-w-xs cursor-pointer rounded-lg border border-gray-200 shadow-lg hover:bg-gray-100 transition-colors duration-300"
+              className="w-full max-w-xs cursor-pointer rounded-lg border border-gray-200 shadow-lg hover:bg-gray-100 transition-colors duration-300"
               onClick={() => openEdit(profile.id)}
             >
               <CardHeader className="flex flex-col items-center p-4">
