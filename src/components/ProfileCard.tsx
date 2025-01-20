@@ -1,9 +1,9 @@
+import { useStore } from "@/hooks/useStore";
 import { User } from "@/types/types";
+import { getFilterValue } from "@/utils/getFilterValue";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
-import { useStore } from "@/hooks/useStore";
-import { getFilterValue } from "@/utils/getFilterValue";
 
 interface ProfileCardProps {
   profile: User;
@@ -11,7 +11,7 @@ interface ProfileCardProps {
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ profile, filter }) => {
-  const { dispatch } = useStore();
+  const { state, dispatch } = useStore();
 
   const handleCardClick = () => {
     dispatch({
@@ -32,12 +32,17 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, filter }) => {
       type: "SELECT_USER",
       payload: { user: profile, showLocation: true },
     });
+    dispatch({
+      type: "TOGGLE_SIDEBAR",
+    });
   };
 
   return (
     <>
       <div
-        className="p-2 hover:bg-zinc-200 hover:cursor-pointer rounded-sm"
+        className={`p-2 hover:cursor-pointer rounded-sm w-full ${
+          state.selectedUser?.id === profile.id ? "bg-zinc-200" : ""
+        }`}
         aria-label="profile card"
         key={profile.id}
         onClick={handleCardClick}
@@ -66,7 +71,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, filter }) => {
             ) : null}
           </div>
         </div>
-        <div className="flex justify-end"></div>
       </div>
       <Separator />
     </>

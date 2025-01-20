@@ -5,6 +5,7 @@ import ProfileDetail from "./ProfileDetail";
 import { useStore } from "@/hooks/useStore";
 import Dashboard from "./Dashboard";
 import { Toaster } from "./ui/toaster";
+import SidebarToggleButton from "./SidebarToggleButton";
 
 const AppLayout: React.FC = () => {
   const { state } = useStore();
@@ -17,6 +18,7 @@ const AppLayout: React.FC = () => {
         <>
           <AppSidebar />
           <AppMapWrapper />
+          <SidebarToggleButton className="z-[999] absolute top-5 right-5" />
         </>
       )}
       <ProfileDetail />

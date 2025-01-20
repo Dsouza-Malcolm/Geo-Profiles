@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Button } from "./ui/button";
+import SidebarToggleButton from "./SidebarToggleButton";
 
 const AppSidebar: React.FC = () => {
   const { state, dispatch } = useStore();
@@ -56,15 +57,18 @@ const AppSidebar: React.FC = () => {
       <div className="border-none rounded-md m-2">
         <div className="flex items-center justify-between mx-2 mb-4">
           <h1 className="nunito-semibold text-base ">GeoProfiles</h1>
-          {isAdmin ? (
-            <Button onClick={openDashboard} variant={"outline"}>
-              Dashboard ✨
-            </Button>
-          ) : (
-            <Button onClick={authenticate} variant={"outline"}>
-              Log In
-            </Button>
-          )}
+          <div className="flex gap-2">
+            {isAdmin ? (
+              <Button onClick={openDashboard} variant={"outline"}>
+                Dashboard ✨
+              </Button>
+            ) : (
+              <Button onClick={authenticate} variant={"outline"}>
+                Log In
+              </Button>
+            )}
+            <SidebarToggleButton className="px-4" />
+          </div>
         </div>
         <div className="flex gap-1 -mx-1">
           <Input
