@@ -2,6 +2,8 @@ import { useToast } from "@/hooks/use-toast";
 import { useStore } from "@/hooks/useStore";
 import { Address } from "@/types/types";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import markerIcon from "../assets/mapMarker.png";
 import { useState } from "react";
 import {
   MapContainer,
@@ -31,6 +33,11 @@ const LocationMap = () => {
     state.newAddress?.coordinates || state.selectedUser?.address?.coordinates
   );
   const { toast } = useToast();
+
+  const customMarkerIcon = new L.Icon({
+    iconUrl: markerIcon,
+    iconSize: [30, 30],
+  });
 
   // Map event handler for selecting a location
   function LocationMarker() {
@@ -71,7 +78,7 @@ const LocationMap = () => {
     });
 
     return position ? (
-      <Marker position={position as [number, number]}>
+      <Marker icon={customMarkerIcon} position={position as [number, number]}>
         <Popup>
           {state.selectedUser?.address?.country &&
           state.selectedUser?.address?.city &&
