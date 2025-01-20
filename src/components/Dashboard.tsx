@@ -57,7 +57,7 @@ const Dashboard = () => {
               GeoProfiles
             </h1>
           </Button>
-          <div className="flex gap-8">
+          <div className="flex  gap-4 sm:gap-8">
             <Button
               className="hidden sm:block"
               onClick={closeDashboard}
