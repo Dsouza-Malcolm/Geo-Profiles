@@ -162,7 +162,7 @@ const ProfileForm = ({ className }: React.ComponentProps<"form">) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn("grid gap-6", className)}
+        className={cn("grid gap-3", className)}
       >
         {/* Full Name */}
         <div className="flex gap-6 items-center">

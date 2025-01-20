@@ -31,20 +31,22 @@ const ProfileDetail = () => {
   if (isMobile) {
     return (
       <Drawer open={state.isProfileModalOpen} onOpenChange={onOpenChange}>
-        <DrawerContent className="z-[1000]">
-          <DrawerHeader className="text-left">
-            <DrawerTitle>
-              {state.isAdmin ? "Edit profile" : "Profile Details"}
-            </DrawerTitle>
-          </DrawerHeader>
-          <ProfileForm className="px-4" />
-          <DrawerFooter className="pt-2">
-            {state.isAdmin && state.isDashboardOpen ? null : (
-              <DrawerClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DrawerClose>
-            )}
-          </DrawerFooter>
+        <DrawerContent className="z-[1000] max-h-[80vh]">
+          <div className="overflow-auto scrollbar-none">
+            <DrawerHeader className="text-left">
+              <DrawerTitle>
+                {state.isAdmin ? "Edit profile" : "Profile Details"}
+              </DrawerTitle>
+            </DrawerHeader>
+            <ProfileForm className="px-4" />
+            <DrawerFooter className="pt-2">
+              {state.isAdmin && state.isDashboardOpen ? null : (
+                <DrawerClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DrawerClose>
+              )}
+            </DrawerFooter>
+          </div>
         </DrawerContent>
       </Drawer>
     );
